@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}
+    Bookmark List
+{% endblock %}
+
+{% block content %}
+    <div class="btn-group d-block text-right mb-1" role="group">
+       <a href="{% url 'bookmark:create' %}" class="btn btn-info"> Add Bookmark</a>
+    </div>
+
+    <table class="table">
+        <thread>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Site</th>
+                <th scope="col">Url</th>
+                <th scope="col">Modify</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thread>
+        <tbody>
+            {% for bookmark in object_list %}
+            <tr>
+                <td>
+                    {{ forloop.counter }}
+                </td>
+                <td>
+                    {{ bookmark.site_name }}
+                </td>
+                <td>
+                    <a href="{{ bookmark.url }}" target="_blank">{{ bookmark.url }}</a>
+
+                </td>
+                <td><a href="{% url 'bookmark:update' bookmark.id %}" class="btn btn-success btn-sm">Modify</a></td>
+                <td><a href="{% url 'bookmark:delete' bookmark.id %}" class="btn btn-danger btn-sm">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
+
